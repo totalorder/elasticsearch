@@ -126,6 +126,7 @@ class ClusterFormationTasks {
             Object dependsOn
             if (node.nodeVersion.onOrAfter("6.5.0")) {
                 writeConfigSetup = { Map esConfig ->
+                    esConfig["network.host"] = "0.0.0.0"
                     // Don't force discovery provider if one is set by the test cluster specs already
                     if (esConfig.containsKey('discovery.zen.hosts_provider') == false) {
                         esConfig['discovery.zen.hosts_provider'] = 'file'
